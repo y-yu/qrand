@@ -1,0 +1,17 @@
+version: '3.2'
+services:
+  qrand-server:
+    image: yyupw/qrand-server:latest
+    build:
+      context: ./server
+      cache_from:
+        - yyupw/qrand-server:latest
+    ports:
+      - "5000:5000"
+
+  qrand-client:
+    image: yyupw/qrand-client:latest
+    build:
+      context: ./server
+      cache_from:
+        - yyupw/qrand-client:latest

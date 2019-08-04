@@ -6,6 +6,11 @@ class GenerateQRandService:
         self.random_impl = random_impl
 
     def generate(self) -> (int, int, any):
+        # ここでは次のような1 qubit状態をつくっている。
+        #   s1 = |0>
+        #   s2 = |1>
+        #   s3 = |+>
+        #   s4 = |->
         s1 = QuantumState(1)
         s1.set_computational_basis(0)
         s2 = QuantumState(1)
@@ -25,6 +30,7 @@ class GenerateQRandService:
             s1, s2, s3, s4
         ]
 
+        # `a`と`x`によって`psi`からqubitを選択する。
         a = self.random_impl.choice([0, 1])
         x = self.random_impl.choice([0, 1])
 

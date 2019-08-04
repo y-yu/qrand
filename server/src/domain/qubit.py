@@ -6,10 +6,13 @@ class Qubit:
         self.alpha = alpha
         self.beta = beta
 
-    def toQulacsState(self) -> QuantumState:
+    # 複素数の組である`Qubit`型からqulacsの型へと変換する。
+    def to_qulacs_state(self) -> QuantumState:
         s = QuantumState(1)
         s.set_computational_basis(0)
 
         gate = DenseMatrix(0, [[self.alpha, 0], [self.beta, 0]])
         gate.update_quantum_state(s)
+        print("qulacs qubit is %s" % s.get_vector())
+
         return s
