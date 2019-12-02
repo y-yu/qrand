@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory
 from .service import quantum
 from random import Random
 import requests
@@ -28,14 +28,15 @@ def measure():
 @app.route('/verify', methods=['GET'])
 def verify():
     global a, x, response
-    tmp = requests.post(
+    verification = requests.post(
         'http://qrand-server:5001/verify',
         json = {'a': a, 'x': x},
         cookies = response.cookies
     )
-    print(str(tmp.json()))
-    return str(tmp.json())
-
+    if (verification.content == b"True"):
+        return str(int(response.json()) ^ a)
+    else:
+        return str("failed")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

@@ -15,5 +15,5 @@ class MeasureQRandController:
     # クライアントはサーバーに対して`a`と`x`を公開して
     # それとセッションに保存された1 qubitの測定結果を元に
     # コイントスが正常に行なわれたかを判定する。
-    def post_ax(self, a: int, x: int) -> int:
+    def post_ax(self, a: int, x: int) -> bool:
         return self.measure_service.verify(a, x)

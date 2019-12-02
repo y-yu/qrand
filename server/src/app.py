@@ -22,6 +22,7 @@ measureController = controller.masure.MeasureQRandController(qrand)
 def measure():
     json = request.get_json()
     psi = json['psi']
+
     return str(measureController.post_qubit(complex(psi[0]), complex(psi[1])))
 
 # クライアントは次のようなJSON形式で`x`と`a`を公開する。

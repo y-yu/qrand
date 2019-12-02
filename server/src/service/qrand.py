@@ -25,9 +25,9 @@ class MeasureQRandService:
         # クライアントから公開された`a`と`a^`が等しいならば、
         # クライアント側の`x`と`x^`は等しくなければならない。
         if a == a_hat and x != x_hat:
-            raise Exception()
+            return False
         else:
-            return a ^ b
+            return True
 
     # 測定を行うプライベート関数
     def _qulacs_measure(self, a_hat: int, qubit: Qubit) -> int:
