@@ -7,11 +7,23 @@ services:
       cache_from:
         - yyupw/qrand-server:latest
     ports:
-      - "5000:5000"
+      - "5001:5001"
+    environment:
+      - "PORT=5001"
+      - "FLASK_DEBUG=1"
+    volumes:
+      - "./server/src:/workdir"
 
   qrand-client:
     image: yyupw/qrand-client:latest
     build:
-      context: ./server
+      context: ./client
       cache_from:
         - yyupw/qrand-client:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - "PORT=5000"
+      - "FLASK_DEBUG=1"
+    volumes:
+      - "./client/src:/workdir"

@@ -14,7 +14,8 @@ RUN apk add --no-cache --virtual .qulacs-build-deps \
 
 COPY requirements.txt /workdir/requirements.txt
 
-RUN pip install -r requirements.txt && \
-    apk del .qulacs-build-deps
+RUN pip install -r requirements.txt
 
-ENTRYPOINT ["/bin/bash", "-c", "flask run"]
+RUN apk add --no-cache bash
+
+ENTRYPOINT ["/bin/bash", "-c", "flask run --port $PORT --host 0.0.0.0"]

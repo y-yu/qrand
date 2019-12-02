@@ -6,6 +6,7 @@ from random import Random
 
 app = Flask(__name__)
 
+# TODO: 適当なのをどうにかしろ
 app.secret_key = 'test'
 
 result = repository.result.ResultRepository(session)
@@ -34,3 +35,6 @@ def verify():
     x = int(json['x'])
 
     return str(measureController.post_ax(a, x))
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')

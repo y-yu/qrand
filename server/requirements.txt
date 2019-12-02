@@ -1,3 +1,4 @@
-qulacs >= 0.1.4.1
+qulacs == 0.1.4.1
 Flask >= 1.0.2
 numpy >= 1.16.2
+requests >= 2.22.0
