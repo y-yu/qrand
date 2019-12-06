@@ -22,6 +22,13 @@
       <img src="./assets/gachagacha.png" alt="gachagacha" />
     </p>
 
+    <div style="width: 30%; display: block; margin-left: auto; margin-right: auto;">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">確率</span>
+      </div>
+      <input id="count" class="form-control" type="text"/>
+    </div>
+
     <p>
       <button type="button" id="start" class="btn btn-primary" style="margin-top: 3em">抽選！</button>
     </p>
@@ -30,21 +37,47 @@
   </div>
 
   <script>
+    function coinToss(measureAPI, verifyAPI, n, callback) {
+      coinTossInner(
+        measureAPI,
+        verifyAPI,
+        function (data) {
+          console.log(data, n);
+          if (n > 1 && data === 0) {
+            coinToss(measureAPI, verifyAPI, n - 1, callback);
+          } else if (n === 1) {
+            callback(data === 0);
+          } else {
+            callback(false);
+          }
+        }
+      )
+    }
+
+    function coinTossInner(measureAPI, verifyAPI, callback) {
+      $.getJSON(measureAPI, function(_) {
+        $.getJSON(verifyAPI, function(data) {
+          callback(data);
+        });
+      });
+    }
+
     $( "#start" ).click(function() {
+      var count = parseFloat($( "#count" ).val());
+
+      console.log(count);
+
       var measureAPI = "./measure";
       var verifyAPI = "./verify";
-      $.getJSON(measureAPI, function(_) {
-          $.getJSON(verifyAPI, function(data) {
-            var result = "";
-            if (data == 0) {
-              result = "表";
-            } else {
-              result = "裏";
-            }
 
-            $( "#result" ).text(result);
-          });
-      });
+      coinToss(measureAPI, verifyAPI, count, function (result) {
+        console.log(result)
+        if (result) {
+          $( "#result" ).text("あたり！");
+        } else {
+          $( "#result" ).text("はずれ！");
+        }
+      })
     });
   </script>
 </body>
