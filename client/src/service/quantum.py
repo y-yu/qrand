@@ -1,16 +1,18 @@
 from random import Random
 from qulacs import QuantumCircuit, QuantumState
+from qulacs.gate import DenseMatrix
+import numpy
 
 class GenerateQRandService:
     def __init__(self, random_impl: Random):
         self.random_impl = random_impl
 
-    def generate(self) -> (int, int, any):
+    def generate(self) -> (int, int, numpy.ndarray):
         # ここでは次のような1 qubit状態をつくっている。
-        #   s1 = |0>
-        #   s2 = |1>
-        #   s3 = |+>
-        #   s4 = |->
+        #   s1 = √(0.9)|0> + √(0.1)|1>
+        #   s2 = √(0.1)|0> - √(0.9)|1>
+        #   s3 = √(0.9)|0> - √(0.1)|1>
+        #   s4 = √(0.1)|0> + √(0.9)|1>
         s1 = QuantumState(1)
         s1.set_computational_basis(0)
         s2 = QuantumState(1)
@@ -18,6 +20,7 @@ class GenerateQRandService:
 
         c1 = QuantumCircuit(1)
         c1.add_H_gate(0)
+        c2 = DenseMatrix(0, [[0, 1], [1, 0]])
 
         s3 = QuantumState(1)
         s3.set_computational_basis(0)
