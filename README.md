@@ -1,6 +1,8 @@
 A fair gacha using Quantum simulator 
 =========================================
 
+[![Build Status](https://travis-ci.org/y-yu/qrand.svg?branch=master)](https://travis-ci.org/y-yu/qrand)
+
 ## How to use
 
 1. Install [Docker](https://www.docker.com) and `docker-compose` command
