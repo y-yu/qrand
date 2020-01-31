@@ -23,4 +23,6 @@ install:
   - docker-compose build
 
 script:
-  - docker-compose up --abort-on-container-exit
+  - docker-compose up --detach
+  - sleep 5
+  - curl http://localhost:5000/
