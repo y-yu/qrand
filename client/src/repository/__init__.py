@@ -1,0 +1,1 @@
+from . import qrand_api_caller
