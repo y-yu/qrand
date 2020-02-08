@@ -22,6 +22,10 @@
             <img src="./assets/gachagacha.png" alt="gachagacha" />
         </p>
 
+        <p>
+            <button type="button" id="restart" class="btn btn-info disabled" style="margin-top: 3em" disabled>再起動</button>
+        </p>
+
         <p id="result" style="font-size: x-large">
         </p>
 
@@ -47,10 +51,12 @@
                 $( "#result" ).append("🙅‍");
                 $( "#start" ).addClass("disabled").prop('disabled', true);
                 $( "#cheat" ).addClass("disabled").prop('disabled', true);
+                $( "#restart" ).removeClass("disabled").prop("disabled", false);
             } else if (response.is_verify_valid === false) {
                 $( "#start" ).addClass("disabled").prop('disabled', true);
                 $( "#cheat" ).addClass("disabled").prop('disabled', true);
                 $( "#result" ).html("<span class='text-warning'>Cheat detected!</span>");
+                $( "#restart" ).removeClass("disabled").prop("disabled", false);
             }
         }
 
@@ -86,6 +92,12 @@
                 makeResult(response)
             })
 
+        });
+
+        $( "#restart" ).click(function () {
+            $( "#result" ).html("");
+            $( "#start" ).removeClass("disabled").prop('disabled', false);
+            $( "#cheat" ).removeClass("disabled").prop('disabled', false);
         });
     </script>
 </body>
